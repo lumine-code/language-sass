@@ -8,6 +8,10 @@ Sass and SCSS language support.
 - **Syntax highlighting**: full grammar coverage for Sass, SCSS, and SassDoc files.
 - **Snippets**: shortcuts for common Sass and SCSS rules.
 
+## Installation
+
+To install `language-sass` search for _language-sass_ in the Install pane of the Lumine settings or run `lumine --install lumine-code/language-sass`.
+
 ## Services
 
 - **hyperlink.injection** (`^1.0.0`): consumed to highlight URLs inside stylesheets as clickable links.
