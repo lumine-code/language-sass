@@ -15,7 +15,7 @@
   (#set! capture.final true))
 
 ((ERROR
-  (attribute_name) @invalid.illegal)
+  (attribute_name) @invalid.illegal.scss)
   (#set! capture.final true))
 
 ; COMMENTS
