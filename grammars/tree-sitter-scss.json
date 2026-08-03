@@ -1,7 +1,7 @@
 {
   "name": "SCSS",
   "scopeName": "source.css.scss",
-  "type": "modern-tree-sitter",
+  "type": "tree-sitter",
   // Built from the fork at savetheclocktower/tree-sitter-scss.
   "parser": "tree-sitter-scss",
   "fileTypes": ["scss", "css.scss", "css.scss.erb", "scss.erb", "scss.liquid"],
