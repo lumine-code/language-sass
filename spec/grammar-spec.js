@@ -4,8 +4,8 @@ const GRAMMAR_TEST_FILES = ["test.scss"];
 
 describe("Grammar tests", () => {
   beforeEach(async () => {
-    atom.config.set("language.useTreeSitterParsers", true);
-    await atom.packages.activatePackage("language-sass");
+    lumine.config.set("language.useTreeSitterParsers", true);
+    await lumine.packages.activatePackage("language-sass");
   });
 
   it("passes grammar tests", async () => {

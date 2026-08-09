@@ -2,11 +2,11 @@ describe("Sass grammar", function () {
   let grammar = null;
 
   beforeEach(function () {
-    waitsForPromise(() => atom.packages.activatePackage("language-css"));
+    waitsForPromise(() => lumine.packages.activatePackage("language-css"));
 
-    waitsForPromise(() => atom.packages.activatePackage("language-sass"));
+    waitsForPromise(() => lumine.packages.activatePackage("language-sass"));
 
-    runs(() => (grammar = atom.grammars.grammarForScopeName("source.sass")));
+    runs(() => (grammar = lumine.grammars.grammarForScopeName("source.sass")));
   });
 
   it("parses the grammar", function () {
