@@ -1,12 +1,15 @@
 describe("SCSS grammar", function () {
   let grammar = null;
 
-  beforeEach(function () {
-    waitsForPromise(() => lumine.packages.activatePackage("language-css"));
+  beforeEach(async () => {
+    // A TextMate grammar and a Tree-sitter one both claim `source.css.scss`,
+    // and these are the TextMate token assertions, so pin the parser.
+    lumine.config.set("language.useTreeSitterParsers", false);
 
-    waitsForPromise(() => lumine.packages.activatePackage("language-sass"));
+    await lumine.packages.activatePackage("language-css");
+    await lumine.packages.activatePackage("language-sass");
 
-    runs(() => (grammar = lumine.grammars.grammarForScopeName("source.css.scss")));
+    grammar = lumine.grammars.grammarForScopeName("source.css.scss");
   });
 
   it("parses the grammar", function () {
@@ -1409,9 +1412,11 @@ describe("SCSS grammar", function () {
 
   describe("@page", () =>
     it("tokenizes it correctly", function () {
+      // The indent on the declaration is deliberate: the expectations below
+      // start with a two-space leading-whitespace token.
       let tokens = grammar.tokenizeLines(`\
 @page {
-text-align: center;
+  text-align: center;
 }\
 `);
 
@@ -1465,7 +1470,7 @@ text-align: center;
 
       tokens = grammar.tokenizeLines(`\
 @page :left {
-text-align: center;
+  text-align: center;
 }\
 `);
 
@@ -1527,7 +1532,7 @@ text-align: center;
 
       tokens = grammar.tokenizeLines(`\
 @page:left {
-text-align: center;
+  text-align: center;
 }\
 `);
 
@@ -2169,9 +2174,11 @@ another-one { display: none; }\
 
   describe("property names with a prefix that matches an element name", () =>
     it("does not confuse them with properties", function () {
+      // The indent on the declaration is deliberate: the expectations below
+      // start with a two-space leading-whitespace token.
       let tokens = grammar.tokenizeLines(`\
 text {
-text-align: center;
+  text-align: center;
 }\
 `);
 
@@ -2216,7 +2223,7 @@ text-align: center;
 
       tokens = grammar.tokenizeLines(`\
 table {
-table-layout: fixed;
+  table-layout: fixed;
 }\
 `);
 

@@ -1,14 +1,14 @@
 describe("SassDoc grammar", function () {
   let grammar = null;
 
-  beforeEach(function () {
+  beforeEach(async () => {
     // There isn't a Tree-sitter grammar for SassDoc that I'm aware of. Users
     // who expect thorough highlighting of SassDoc can add a scope-specific
     // override to prefer the TextMate-style SCSS grammar.
     lumine.config.set("language.useTreeSitterParsers", false);
-    waitsForPromise(() => lumine.packages.activatePackage("language-sass"));
+    await lumine.packages.activatePackage("language-sass");
 
-    runs(() => (grammar = lumine.grammars.grammarForScopeName("source.css.scss")));
+    grammar = lumine.grammars.grammarForScopeName("source.css.scss");
   });
 
   describe("block tags", function () {

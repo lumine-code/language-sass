@@ -1,12 +1,12 @@
 describe("Sass grammar", function () {
   let grammar = null;
 
-  beforeEach(function () {
-    waitsForPromise(() => lumine.packages.activatePackage("language-css"));
+  beforeEach(async () => {
+    await lumine.packages.activatePackage("language-css");
 
-    waitsForPromise(() => lumine.packages.activatePackage("language-sass"));
+    await lumine.packages.activatePackage("language-sass");
 
-    runs(() => (grammar = lumine.grammars.grammarForScopeName("source.sass")));
+    grammar = lumine.grammars.grammarForScopeName("source.sass");
   });
 
   it("parses the grammar", function () {
