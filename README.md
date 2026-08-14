@@ -10,12 +10,12 @@ Sass and SCSS language support.
 
 ## Installation
 
-To install `language-sass` search for _language-sass_ in the Install pane of the Lumine settings or run `lumine --install lumine-code/language-sass`.
+To install `language-sass` search for it in the Install pane of the Lumine settings, or run the command `lumine --install lumine-code/language-sass`.
 
 ## Services
 
-- **hyperlink.injection** (`^1.0.0`): consumed to highlight URLs inside stylesheets as clickable links.
-- **todo.injection** (`^1.0.0`): consumed to highlight `TODO`-style markers inside comments.
+- `hyperlink.injection`: consumed to highlight URLs inside stylesheets as clickable links.
+- `todo.injection`: consumed to highlight `TODO`-style markers inside comments.
 
 ## Contributing
 
