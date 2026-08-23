@@ -8,7 +8,7 @@
   "injectionRegex": "^(scss|SCSS)$",
   "treeSitter": {
     "parserSource": "github:simeonoff/tree-sitter-scss#v0.2.0",
-    "wasmBuildTool": "tree-sitter-cli#v0.26.11",
+    "wasmBuildTool": "tree-sitter-cli#v0.26.13",
     "grammar": "tree-sitter/tree-sitter-scss.wasm",
     "highlightsQuery": "tree-sitter/highlights.scm",
     "foldsQuery": "tree-sitter/folds.scm",
