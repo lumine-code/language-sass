@@ -1,25 +1,17 @@
 {
   ".source.sass": {
-    "language": {
-      "autoIndentOnPaste": false,
-      "increaseIndentPattern": "(?x)\n^(?!\\s*$)\\s* # Start of non empty line\n(\n  [^:@,]+ # No colons, commas and at signs (for regular selectors like body)\n  |\n  [}\\w&-]+::?[#\\w&-]+ # Pseudo-elements/classes (something::before)\n  |\n  [}\\w&-]+:[\\w-]+\\(.*\\) # Functional pseudo-classes (something:not(.checked))\n  |\n  @(?!import|return).* # At-rule (except import and return) since some at-rules may contain colons (@media(max-width: 922px))\n)\n\\s*$ # End of line"
+    "editor": {
+      "increaseIndentPattern": "(?x)\n^(?!\\s*$)\\s* # Start of non empty line\n(\n  [^:@,]+ # No colons, commas and at signs (for regular selectors like body)\n  |\n  [}\\w&-]+::?[#\\w&-]+ # Pseudo-elements/classes (something::before)\n  |\n  [}\\w&-]+:[\\w-]+\\(.*\\) # Functional pseudo-classes (something:not(.checked))\n  |\n  @(?!import|return).* # At-rule (except import and return) since some at-rules may contain colons (@media(max-width: 922px))\n)\n\\s*$ # End of line",
+      "autoIndentOnPaste": false
     }
   },
   ".source.css.scss": {
-    "language": {
+    "editor": {
       "increaseIndentPattern": "(^.*\\{[^}]*$)",
       "decreaseIndentPattern": "^\\s*\\}"
     }
   },
   ".source.sass, .source.css.scss": {
-    "language": {
-      "nonWordCharacters": "/\\()\"':,.;<>~!#%^&*|+=[]{}`?…",
-      "commentStart": "// ",
-      "commentDelimiters": {
-        "line": "//",
-        "block": ["/*", "*/"]
-      }
-    },
     "autocomplete": {
       "symbols": {
         "mixin": {
@@ -38,6 +30,14 @@
           "selector": ".attribute-name.id, .attribute-name.class",
           "typePriority": 1
         }
+      }
+    },
+    "editor": {
+      "nonWordCharacters": "/\\()\"':,.;<>~!#%^&*|+=[]{}`?…",
+      "commentStart": "// ",
+      "commentDelimiters": {
+        "line": "//",
+        "block": ["/*", "*/"]
       }
     }
   },

@@ -2,7 +2,7 @@ const dedent = require("dedent");
 
 describe("Language sass", () => {
   beforeEach(async () => {
-    lumine.config.set("language.useTreeSitterParsers", false);
+    lumine.config.set("editor.useTreeSitterParsers", false);
     await lumine.packages.activatePackage("language-sass");
   });
 

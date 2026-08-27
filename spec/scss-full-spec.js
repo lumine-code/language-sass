@@ -4,7 +4,7 @@ describe("SCSS grammar", function () {
   beforeEach(async () => {
     // A TextMate grammar and a Tree-sitter one both claim `source.css.scss`,
     // and these are the TextMate token assertions, so pin the parser.
-    lumine.config.set("language.useTreeSitterParsers", false);
+    lumine.config.set("editor.useTreeSitterParsers", false);
 
     await lumine.packages.activatePackage("language-css");
     await lumine.packages.activatePackage("language-sass");
