@@ -4,8 +4,9 @@ Sass and SCSS language support.
 
 ## Features
 
-- **Grammars**: provides Tree-sitter grammars built from [tree-sitter-scss](https://github.com/simeonoff/tree-sitter-scss) and TextMate grammars derived from [atom/language-sass](https://github.com/atom/language-sass).
-- **Syntax highlighting**: full grammar coverage for Sass, SCSS, and SassDoc files.
+- **Grammars**: provides Tree-sitter grammars built from [tree-sitter-sass](https://github.com/bajrangCoder/tree-sitter-sass), [tree-sitter-scss](https://github.com/simeonoff/tree-sitter-scss), and [tree-sitter-sassdoc](https://github.com/simeonoff/tree-sitter-sassdoc).
+- **Syntax highlighting**: highlights Sass and SCSS syntax with embedded SassDoc and typed `@example` blocks.
+- **Code structure**: provides folding, indentation, and symbol tags for both stylesheet syntaxes.
 - **Snippets**: shortcuts for common Sass and SCSS rules.
 
 ## Installation

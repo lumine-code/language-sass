@@ -1,14 +1,7 @@
 {
   ".source.sass": {
     "editor": {
-      "increaseIndentPattern": "(?x)\n^(?!\\s*$)\\s* # Start of non empty line\n(\n  [^:@,]+ # No colons, commas and at signs (for regular selectors like body)\n  |\n  [}\\w&-]+::?[#\\w&-]+ # Pseudo-elements/classes (something::before)\n  |\n  [}\\w&-]+:[\\w-]+\\(.*\\) # Functional pseudo-classes (something:not(.checked))\n  |\n  @(?!import|return).* # At-rule (except import and return) since some at-rules may contain colons (@media(max-width: 922px))\n)\n\\s*$ # End of line",
       "autoIndentOnPaste": false
-    }
-  },
-  ".source.css.scss": {
-    "editor": {
-      "increaseIndentPattern": "(^.*\\{[^}]*$)",
-      "decreaseIndentPattern": "^\\s*\\}"
     }
   },
   ".source.sass, .source.css.scss": {

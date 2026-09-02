@@ -130,6 +130,11 @@
 (declaration
   (property_name) @support.type.property-name.scss)
 
+; Preserve the package's value-completion scope for Tree-sitter SCSS.
+(declaration
+  (property_name)
+  (_) @meta.property-value.scss)
+
 (important) @keyword.other.important.css.scss
 (default) @keyword.other.default.scss
 
