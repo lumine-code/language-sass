@@ -5,7 +5,7 @@
   "injectionNames": ["sassdoc"],
   "treeSitter": {
     "parserSource": "github:simeonoff/tree-sitter-sassdoc#38abe86eac15ed8d668de04df963ef0a4c220cfe",
-    "wasmBuildTool": "tree-sitter-cli#v0.26.13",
+    "wasmBuildTool": "tree-sitter-cli#v0.27.0",
     "grammar": "sassdoc.wasm",
     "highlightsQuery": "sassdoc-highlights.scm",
     "foldsQuery": "sassdoc-folds.scm"
