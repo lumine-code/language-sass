@@ -2,7 +2,8 @@
 ; fb280c41b070657e4ff4d4e5e6eea6cb19efd9b8 (MIT).
 
 (comment) @comment.block.sass
-(single_line_comment) @comment.line.double-slash.sass
+((single_line_comment) @comment.line.double-slash.sass
+  (#set! adjust.endBeforeFirstMatchOf "\\r?$"))
 
 [
   "@import"

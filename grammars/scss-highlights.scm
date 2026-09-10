@@ -29,7 +29,8 @@
 ((comment) @punctuation.definition.comment.end.scss
   (#set! adjust.startAndEndAroundFirstMatchOf "\\*/$"))
 
-(single_line_comment) @comment.line.double-slash.scss
+((single_line_comment) @comment.line.double-slash.scss
+  (#set! adjust.endBeforeFirstMatchOf "\\r?$"))
 
 ((single_line_comment) @punctuation.definition.comment.scss
   (#set! adjust.startAndEndAroundFirstMatchOf "^//"))
@@ -37,7 +38,8 @@
 ; SassDoc comments parse into their own nodes rather than into
 ; `single_line_comment`, so without these a `///` comment carries no comment
 ; scope at all and renders as ordinary text.
-(sassdoc_line) @comment.line.documentation.scss
+((sassdoc_line) @comment.line.documentation.scss
+  (#set! adjust.endBeforeFirstMatchOf "\\r?$"))
 
 ((sassdoc_line) @punctuation.definition.comment.scss
   (#set! adjust.startAndEndAroundFirstMatchOf "^///"))
@@ -91,9 +93,12 @@
   (#set! adjust.startAt lastChild.previousSibling.startPosition)
   (#set! adjust.endAt lastChild.endPosition))
 
-(arguments
-  "(" @punctuation.definition.arguments.begin.bracket.round.scss
-  ")" @punctuation.definition.arguments.end.bracket.round.scss)
+("(" @punctuation.definition.arguments.begin.bracket.round.scss
+  (#is? test.childOfType arguments)
+  (#is? test.first true))
+(")" @punctuation.definition.arguments.end.bracket.round.scss
+  (#is? test.childOfType arguments)
+  (#is? test.last true))
 
 (attribute_selector
   "[" @punctuation.definition.entity.begin.bracket.square.scss
@@ -216,8 +221,12 @@
 ; =========
 
 ((function_name) @support.function.var.css.scss
-  (arguments (plain_value) @variable.css.scss)
   (#eq? @support.function.var.css.scss "var")
+  (#set! capture.final true))
+
+((plain_value) @variable.css.scss
+  (#is? test.typeAt "parent arguments")
+  (#is? test.textAt "parent.previousNamedSibling var")
   (#set! capture.final true))
 
 ((function_name) @support.function._TEXT_.css.scss
@@ -226,9 +235,9 @@
 
 ((function_name) @support.other.function._TEXT_.scss)
 
-((function_name) @_IGNORE_
-  (arguments (plain_value) @string.unquoted.scss)
-  (#eq? @_IGNORE_ "url"))
+((plain_value) @string.unquoted.scss
+  (#is? test.typeAt "parent arguments")
+  (#is? test.textAt "parent.previousNamedSibling url"))
 
 ((module) @support.module._TEXT_.scss
   (#match? @support.module._TEXT_.scss "^(color|list|map|math|meta|selector|string)$")
@@ -410,8 +419,12 @@
 ; PUNCTUATION
 ; ===========
 
-(parameters "(") @punctuation.definition.parameters.begin.brace.round.scss
-(parameters ")") @punctuation.definition.parameters.end.brace.round.scss
+("(" @punctuation.definition.parameters.begin.brace.round.scss
+  (#is? test.childOfType parameters)
+  (#is? test.first true))
+(")" @punctuation.definition.parameters.end.brace.round.scss
+  (#is? test.childOfType parameters)
+  (#is? test.last true))
 
 "," @punctuation.separator.comma.scss
 ":" @punctuation.separator.colon.scss

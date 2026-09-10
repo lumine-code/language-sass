@@ -1,7 +1,8 @@
 ; Based on simeonoff/tree-sitter-sassdoc queries/sassdoc/highlights.scm at
 ; 38abe86eac15ed8d668de04df963ef0a4c220cfe (MIT).
 
-(document) @comment.documentation.sassdoc
+((document) @comment.documentation.sassdoc
+  (#set! adjust.endBeforeFirstMatchOf "\\r?$"))
 
 [
   "@param"
@@ -45,22 +46,27 @@
 (variable_name) @variable.other.sassdoc
 (version) @constant.numeric.sassdoc
 
-[(description) (line_description)] @comment.documentation.sassdoc
+([ (description) (line_description) ] @comment.documentation.sassdoc
+  (#set! adjust.endBeforeFirstMatchOf "\\r?$"))
 
 (example_language) @entity.name.tag.sassdoc
-[(code_block) (code_line)] @comment.documentation.sassdoc
+([ (code_block) (code_line) ] @comment.documentation.sassdoc
+  (#set! adjust.endBeforeFirstMatchOf "\\r?$"))
 (see_reference) @support.function.sassdoc
 (group_name) @entity.name.namespace.sassdoc
 (alias_name) @entity.name.function.sassdoc
 (package_name) @entity.name.namespace.sassdoc
 (property_name) @variable.other.property.sassdoc
 (url) @markup.underline.link.sassdoc
-(link_caption) @comment.documentation.sassdoc
-(custom_name) @string.unquoted.sassdoc
+((link_caption) @comment.documentation.sassdoc
+  (#set! adjust.endBeforeFirstMatchOf "\\r?$"))
+((custom_name) @string.unquoted.sassdoc
+  (#set! adjust.endBeforeFirstMatchOf "\\r?$"))
 (default_value) @string.other.sassdoc
 
 ["{" "}"] @punctuation.section.braces.sassdoc
 "|" @punctuation.separator.sassdoc
 (tag_description "-" @punctuation.separator.sassdoc)
 
-(ERROR) @comment.documentation.sassdoc
+((ERROR) @comment.documentation.sassdoc
+  (#set! adjust.endBeforeFirstMatchOf "\\r?$"))
