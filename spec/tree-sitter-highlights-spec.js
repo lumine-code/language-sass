@@ -19,12 +19,12 @@ describe("SCSS Tree-sitter highlights", () => {
     await editor.getBuffer().languageMode.ready;
   }
 
-  function rawCaptures(startRow, endRow) {
-    const layer = editor.getBuffer().languageMode.rootLanguageLayer;
-    return layer.queries.highlightsQuery.captures(layer.tree.rootNode, {
+  async function rawCaptures(startRow, endRow) {
+    const groups = await editor.getGrammarQueryCaptureGroups("highlightsQuery", {
       startPosition: new Point(startRow, 0),
       endPosition: new Point(endRow, 0),
     });
+    return groups.find(({ grammar }) => grammar === editor.getGrammar())?.captures ?? [];
   }
 
   it("preserves argument, variable, URL, and mixin-parameter scopes", async () => {
@@ -68,10 +68,10 @@ a {
     argumentsSource.push("  );", "}");
     await setUp(argumentsSource.join("\r\n"));
 
-    let captures = rawCaptures(3000, 3006);
+    let captures = await rawCaptures(3000, 3006);
     let localCaptures = captures.filter((capture) => capture.node.startPosition.row >= 3000);
     expect(captures.length).toBeLessThanOrEqual(24);
-    expect(localCaptures.length).toBe(18);
+    expect(localCaptures.length).toBe(6);
     expect(localCaptures.every((capture) => capture.node.startPosition.row < 3006)).toBe(true);
 
     const parametersSource = ["@mixin generated("];
@@ -82,7 +82,7 @@ a {
     editor.setText(parametersSource.join("\r\n"));
     await editor.getBuffer().languageMode.atTransactionEnd();
 
-    captures = rawCaptures(3000, 3006);
+    captures = await rawCaptures(3000, 3006);
     expect(captures.length).toBeLessThanOrEqual(16);
     expect(
       captures.every(
