@@ -20,11 +20,19 @@ describe("SCSS Tree-sitter highlights", () => {
   }
 
   async function rawCaptures(startRow, endRow) {
-    const groups = await editor.getGrammarQueryCaptureGroups("highlightsQuery", {
+    const query = await editor.getGrammar().getQuery("highlightsQuery");
+    const root = editor.getSyntaxNodeAtBufferPosition([0, 0], (node) => !node.parent);
+    const raw = query.captures(root, {
       startPosition: new Point(startRow, 0),
       endPosition: new Point(endRow, 0),
     });
-    return groups.find(({ grammar }) => grammar === editor.getGrammar())?.captures ?? [];
+    // Check bounded query work before resolving predicates across the document.
+    expect(raw.length).toBeLessThanOrEqual(24);
+    const nodes = new Set(raw.map(({ node }) => node.id));
+    const groups = await editor.getGrammarQueryCaptureGroups("highlightsQuery");
+    return groups
+      .find(({ grammar }) => grammar === editor.getGrammar())
+      .captures.filter(({ node }) => nodes.has(node.id));
   }
 
   it("preserves argument, variable, URL, and mixin-parameter scopes", async () => {

@@ -91,9 +91,11 @@ describe("Sass injection boundaries", () => {
 
     const sass = points.find(({ scope }) => scope === "source.sass");
     const comments = [{ text: "// ordinary" }, { text: "/// @param {String} $name" }];
-    const stylesheet = { descendantsOfType: () => comments };
-    expect(sass.options.language(stylesheet)).toBe("sassdoc");
-    expect(sass.options.content(stylesheet)).toEqual([comments[1]]);
+    expect(sass.options.type).toBe("single_line_comment");
+    expect(sass.options.combined).toBe(true);
+    expect(sass.options.language(comments[0])).toBeNull();
+    expect(sass.options.language(comments[1])).toBe("sassdoc");
+    expect(sass.options.content(comments[1])).toBe(comments[1]);
     expect(sass.options.newlinesBetween).toBe(true);
 
     const example = points.find(({ scope }) => scope === "source.sassdoc");
