@@ -8,6 +8,7 @@
     "wasmBuildTool": "tree-sitter-cli#v0.27.0",
     "grammar": "sassdoc.wasm",
     "highlightsQuery": "sassdoc-highlights.scm",
+    "injectionsQuery": "sassdoc-injections.scm",
     "foldsQuery": "sassdoc-folds.scm"
   }
 }

@@ -1,5 +1,4 @@
 const path = require("path");
-const main = require("../lib/main");
 
 const fixture = (name) => path.join(__dirname, "fixtures", "grammar", name);
 
@@ -41,6 +40,7 @@ describe("Sass family Tree-sitter grammars", () => {
     const text = `/// @param {String} $name - See https://example.com
 /// @example scss - Demo
 ///   .demo { color: red; }
+///   .next { width: 0; }
 @mixin demo($name) { color: red; }`;
     editor.setGrammar(lumine.grammars.grammarForScopeName("source.css.scss"));
     editor.setText(text);
@@ -55,12 +55,19 @@ describe("Sass family Tree-sitter grammars", () => {
     expect(scopesAt("param")).toContain("storage.type.class.sassdoc");
     expect(scopesAt("String")).toContain("entity.name.type.sassdoc");
     expect(scopesAt(".demo", 1)).toContain("entity.other.attribute-name.class.scss");
+    expect(scopesAt(".next", 1)).toContain("entity.other.attribute-name.class.scss");
+    const examples = editor.languageMode
+      .getAllInjectionLayers()
+      .filter((layer) => layer.grammar.scopeName === "source.css.scss");
+    expect(examples.length).toBe(1);
+    expect(examples[0].tree.rootNode.hasError).toBe(false);
   });
 
   it("combines only SassDoc comments in indented Sass", async () => {
     const editor = await lumine.workspace.open();
     const text = `// ordinary comment
 /// @param {Color} $accent - Theme color
+/// @return {Color} - Theme color
 =theme($accent)
   color: $accent`;
     editor.setGrammar(lumine.grammars.grammarForScopeName("source.sass"));
@@ -72,46 +79,24 @@ describe("Sass family Tree-sitter grammars", () => {
     expect(editor.scopeDescriptorForBufferPosition(point).getScopesArray()).toContain(
       "storage.type.class.sassdoc",
     );
+    const layers = editor.languageMode
+      .getAllInjectionLayers()
+      .filter((layer) => layer.grammar.scopeName === "source.sassdoc");
+    expect(layers.length).toBe(1);
+    const ranges = layers[0].getCurrentRanges().map((range) => editor.getTextInBufferRange(range));
+    expect(ranges.some((text) => text.includes("ordinary comment"))).toBe(false);
+    expect(ranges.join("")).toContain("@param");
+    expect(ranges.join("")).toContain("@return");
   });
 });
 
 describe("Sass injection boundaries", () => {
-  it("registers SassDoc and @example injections", () => {
-    const points = [];
-    spyOn(lumine.grammars, "addInjectionPoint").and.callFake((scope, options) => {
-      points.push({ scope, options });
-    });
-
-    main.activate();
-
-    const scss = points.find(({ scope }) => scope === "source.css.scss");
-    expect(scss.options.type).toBe("sassdoc_block");
-    expect(scss.options.language()).toBe("sassdoc");
-    expect(scss.options.includeChildren).toBe(true);
-
-    const sass = points.find(({ scope }) => scope === "source.sass");
-    const comments = [{ text: "// ordinary" }, { text: "/// @param {String} $name" }];
-    expect(sass.options.type).toBe("single_line_comment");
-    expect(sass.options.combined).toBe(true);
-    expect(sass.options.language(comments[0])).toBeNull();
-    expect(sass.options.language(comments[1])).toBe("sassdoc");
-    expect(sass.options.content(comments[1])).toBe(comments[1]);
-    expect(sass.options.newlinesBetween).toBe(true);
-
-    const example = points.find(({ scope }) => scope === "source.sassdoc");
-    const code = [{ text: ".demo {}" }];
-    const tag = {
-      descendantsOfType(type) {
-        if (type === "example_language") return [{ text: "SCSS" }];
-        if (type === "code_line") return code;
-        return [];
-      },
-    };
-    expect(example.options.language(tag)).toBe("scss");
-    expect(example.options.content(tag)).toBe(code);
+  beforeEach(async () => {
+    await lumine.packages.activatePackage("language-sass");
   });
 
   it("keeps host comments and SassDoc text in disjoint service layers", () => {
+    const main = lumine.packages.getActivePackage("language-sass").mainModule;
     const hyperlinkPoints = [];
     const todoPoints = [];
     main.consumeHyperlinkInjection({
