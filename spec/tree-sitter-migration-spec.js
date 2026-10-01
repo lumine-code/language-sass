@@ -95,41 +95,30 @@ describe("Sass injection boundaries", () => {
     await lumine.packages.activatePackage("language-sass");
   });
 
-  it("keeps host comments and SassDoc text in disjoint service layers", () => {
-    const main = lumine.packages.getActivePackage("language-sass").mainModule;
-    const hyperlinkPoints = [];
-    const todoPoints = [];
-    main.consumeHyperlinkInjection({
-      addInjectionPoint(scope, options) {
-        hyperlinkPoints.push({ scope, options });
-      },
-    });
-    main.consumeTodoInjection({
-      addInjectionPoint(scope, options) {
-        todoPoints.push({ scope, options });
-      },
-    });
-
-    const sassHyperlink = hyperlinkPoints.find(
-      ({ scope, options }) =>
-        scope === "source.sass" && options.types.includes("single_line_comment"),
+  it("keeps indented host comments and SassDoc text in disjoint static layers", async () => {
+    const fs = require("fs");
+    for (const name of ["language-hyperlink", "language-todo"]) {
+      const sibling = path.resolve(__dirname, "..", "..", name);
+      await lumine.packages.activatePackage(fs.existsSync(sibling) ? sibling : name);
+    }
+    const editor = await lumine.workspace.open();
+    editor.setGrammar(lumine.grammars.grammarForScopeName("source.sass"));
+    editor.setText(
+      "// TODO https://example.com/plain\n" +
+        "/// @param {String} $name - TODO https://example.com/docs\n" +
+        ".card\n  color: red\n",
     );
-    const sassTodo = todoPoints.find(({ scope }) => scope === "source.sass");
-    expect(sassHyperlink.options.language({ text: "/// docs" })).toBeNull();
-    expect(sassTodo.options.language({ text: "/// docs" })).toBeNull();
-    expect(sassHyperlink.options.language({ text: "// https://example.com" })).toBeUndefined();
-    expect(sassTodo.options.language({ text: "// TODO" })).toBeUndefined();
-
-    expect(hyperlinkPoints.find(({ scope }) => scope === "source.sassdoc").options.types).toEqual([
-      "description",
-      "line_description",
-      "link_caption",
-      "url",
-    ]);
-    expect(todoPoints.find(({ scope }) => scope === "source.sassdoc").options.types).toEqual([
-      "description",
-      "line_description",
-      "link_caption",
-    ]);
+    await editor.languageMode.ready;
+    await editor.languageMode.atGrammarSettlement();
+    const annotations = editor.languageMode
+      .getAllInjectionLayers()
+      .filter((layer) => ["text.todo", "text.hyperlink"].includes(layer.grammar.scopeName));
+    const host = annotations.filter((layer) => layer.depth === 1);
+    expect(host.length).toBe(2);
+    expect(host.every((layer) => layer.getCurrentRanges()[0].start.row === 0)).toBe(true);
+    const documentation = annotations.filter((layer) => layer.depth === 2);
+    expect(documentation.length).toBe(2);
+    expect(documentation.every((layer) => layer.getCurrentRanges()[0].start.row === 1)).toBe(true);
+    editor.destroy();
   });
 });
