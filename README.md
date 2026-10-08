@@ -2,6 +2,8 @@
 
 Sass and SCSS language support.
 
+Fork of [pulsar-edit/pulsar](https://github.com/pulsar-edit/pulsar) (`packages/language-sass`).
+
 ## Features
 
 - **Grammars**: provides Tree-sitter grammars built from [tree-sitter-sass](https://github.com/bajrangCoder/tree-sitter-sass), [tree-sitter-scss](https://github.com/simeonoff/tree-sitter-scss), and [tree-sitter-sassdoc](https://github.com/simeonoff/tree-sitter-sassdoc).
