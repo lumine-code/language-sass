@@ -41,6 +41,7 @@
     "format:check": "prettier --check ."
   },
   "specPackages": [
+    "snippets",
     "language-hyperlink",
     "language-todo"
   ]

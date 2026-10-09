@@ -2,7 +2,7 @@
   ".source.css.scss": {
     "!important": {
       "prefix": "!",
-      "body": "i!important${:;}$0"
+      "body": "!important${1:;}$0"
     },
     "@use": {
       "prefix": "use",
@@ -40,7 +40,7 @@
     },
     "@function": {
       "prefix": "fun",
-      "body": "@mixin ${1:name} {\n  $0\n}",
+      "body": "@function ${1:name}(${2:\\$argument}) {\n  @return ${3:returnValue};\n  $0\n}",
       "description": "Define your own function.",
       "descriptionMoreURL": "https://sass-lang.com/documentation/at-rules/function/"
     }

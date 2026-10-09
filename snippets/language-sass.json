@@ -28,13 +28,13 @@
     },
     "@mixin": {
       "prefix": "mixin",
-      "body": "@mixin ${1:name} {\n\t$0\n}",
+      "body": "@mixin ${1:name}\n\t$0",
       "description": "Mixins allow you to define styles that can be re-used throughout the stylesheet.",
       "descriptionMoreURL": "http://sass-lang.com/documentation/file.SASS_REFERENCE.html#defining_a_mixin"
     },
     "@function": {
       "prefix": "func",
-      "body": "@function ${1:name}(${2:arguments}) {\n\t@return ${3:returnValue};\n}",
+      "body": "@function ${1:name}(${2:\\$argument})\n\t@return ${3:returnValue}\n\t$0",
       "description": "Define your own functions.",
       "descriptionMoreURL": "http://sass-lang.com/documentation/file.SASS_REFERENCE.html#function_directives"
     }
@@ -64,7 +64,7 @@
     },
     "@function": {
       "prefix": "func",
-      "body": "@function ${1:name}(${2:arguments}) {\n\t@return ${3:returnValue};\n}"
+      "body": "@function ${1:name}(${2:\\$argument}) {\n\t@return ${3:returnValue};\n}"
     }
   }
 }
