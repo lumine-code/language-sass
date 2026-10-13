@@ -1,0 +1,16 @@
+{
+  "title": "language-sass",
+  "description": "SCSS syntax highlighting in the editor.",
+  "recordedOn": "2026-10-13",
+  "sourceRevision": "b92624282ec3f5547a44e22786c1f28902f0d81e",
+  "mode": "normal",
+  "fontSettings": "default",
+  "images": [
+    {
+      "file": "demo.png",
+      "label": "SCSS syntax highlighting at the default editor font size.",
+      "width": 1100,
+      "height": 692
+    }
+  ]
+}

@@ -11,6 +11,8 @@ Fork of [pulsar-edit/pulsar](https://github.com/pulsar-edit/pulsar) (`packages/l
 - **Code structure**: provides folding, indentation, and symbol tags for both stylesheet syntaxes.
 - **Snippets**: shortcuts for common Sass and SCSS rules.
 
+![SCSS syntax highlighting at the default editor font size.](.github/demo.png)
+
 ## Installation
 
 To install `language-sass` search for it in the Install pane of the Lumine settings, or run the command `lumine --install lumine-code/language-sass`.
