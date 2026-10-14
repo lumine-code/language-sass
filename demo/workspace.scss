@@ -1,0 +1,26 @@
+$accent: #cf9723;
+$spacing: 16px;
+
+@mixin panel($padding: $spacing) {
+  padding: $padding;
+  border: 1px solid rgba($accent, 0.3);
+}
+
+.workspace {
+  display: grid;
+  gap: $spacing;
+
+  .sidebar {
+    @include panel;
+    width: 240px;
+  }
+
+  .content {
+    @include panel($spacing * 2);
+
+    a {
+      color: $accent;
+      &:hover { text-decoration: underline; }
+    }
+  }
+}
