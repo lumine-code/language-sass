@@ -8,7 +8,8 @@
     "lib",
     "settings",
     "snippets",
-    "spec"
+    "spec",
+    "THIRD_PARTY_NOTICES"
   ],
   "description": "Sass and SCSS language support.",
   "keywords": [
