@@ -142,7 +142,7 @@ SOFTWARE.
 ----- BEGIN THIRD-PARTY LICENSE: parser:simeonoff_tree-sitter-scss -----
 Source: https://github.com/simeonoff/tree-sitter-scss
 Revision: v0.2.0
-Query adaptation: SCSS parenthesized indentation from simeonoff/tree-sitter-scss at db0072fc9af1a2b488b646b4e6360e96541f495d; parser binary remains at v0.2.0.
+Query adaptation: SCSS parenthesized indentation and structural folds from simeonoff/tree-sitter-scss at db0072fc9af1a2b488b646b4e6360e96541f495d; parser binary remains at v0.2.0.
 
 Original file: LICENSE
 
