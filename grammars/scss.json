@@ -7,7 +7,7 @@
   "injectionNames": ["scss"],
   "treeSitter": {
     "parserSource": "github:simeonoff/tree-sitter-scss#v0.2.0",
-    "wasmBuildTool": "tree-sitter-cli#v0.27.0",
+    "wasmBuildTool": "tree-sitter-cli#v0.27.1",
     "grammar": "scss.wasm",
     "highlightsQuery": "scss-highlights.scm",
     "injectionsQuery": "scss-injections.scm",
