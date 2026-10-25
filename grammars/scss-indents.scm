@@ -1,4 +1,7 @@
 
+; Interpolation opens with `#{`, not a block-opening brace.
+(interpolation "}" @_IGNORE_ (#set! capture.final true))
+
 "{" @indent
 "}" @dedent
 
