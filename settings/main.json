@@ -32,6 +32,9 @@
         "line": "//",
         "block": ["/*", "*/"]
       }
+    },
+    "bracket-matcher": {
+      "autocompleteCharacters": ["()", "[]", "{}", "\"\"", "''"]
     }
   },
   ".source.css.scss .meta.property-value": {
