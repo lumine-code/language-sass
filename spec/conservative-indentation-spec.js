@@ -68,4 +68,22 @@ describe("language-sass conservative indentation", () => {
     await editor.autoIndentBufferRows(0, 4);
     expect(editor.lineTextForBufferRow(2)).toBe("       aligned");
   });
+
+  it("does not treat unfinished SCSS property strings as nested blocks", async () => {
+    editor.setGrammar(lumine.grammars.grammarForScopeName("source.css.scss"));
+    for (const source of [
+      '.card {\n  content: "{',
+      ".card {\n  content: 'text {",
+      ".card {\n  content: \"it's {",
+      '.card {\n  content: "escaped \\" {',
+      '.card {\n  content: "{ trailing',
+      '.card {\n  $value: "{',
+      '.card {\n  content: var(--label, "{',
+      '.card {\n  content: attr(data-label, "{',
+      '.card {\n  content: fn("first", "{',
+      '.card {\n  background: url("{',
+    ])
+      await enter(source, 2, 1);
+    await enter('.card {\n  &[data-name="card"] {', 4, 1);
+  });
 });
