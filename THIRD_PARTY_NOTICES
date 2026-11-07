@@ -85,6 +85,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Source: https://github.com/bajrangCoder/tree-sitter-sass
 Revision: fb280c41b070657e4ff4d4e5e6eea6cb19efd9b8
 
+Parser source: github:bajrangCoder/tree-sitter-sass#fb280c41b070657e4ff4d4e5e6eea6cb19efd9b8
+Resolved commit: fb280c41b070657e4ff4d4e5e6eea6cb19efd9b8
+
 Original file: LICENSE
 
 MIT License
@@ -113,6 +116,9 @@ SOFTWARE.
 ----- BEGIN THIRD-PARTY LICENSE: parser:simeonoff_tree-sitter-sassdoc -----
 Source: https://github.com/simeonoff/tree-sitter-sassdoc
 Revision: 38abe86eac15ed8d668de04df963ef0a4c220cfe
+
+Parser source: github:simeonoff/tree-sitter-sassdoc#38abe86eac15ed8d668de04df963ef0a4c220cfe
+Resolved commit: 38abe86eac15ed8d668de04df963ef0a4c220cfe
 
 Original file: LICENSE
 
@@ -143,6 +149,9 @@ SOFTWARE.
 Source: https://github.com/simeonoff/tree-sitter-scss
 Revision: v0.2.0
 Query adaptation: SCSS parenthesized indentation and structural folds from simeonoff/tree-sitter-scss at db0072fc9af1a2b488b646b4e6360e96541f495d; parser binary remains at v0.2.0.
+
+Parser source: github:simeonoff/tree-sitter-scss#v0.2.0
+Resolved commit: 3f918284a73a54b53e4f326b0aa8c74ccbf4ee4d
 
 Original file: LICENSE
 
