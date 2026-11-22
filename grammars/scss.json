@@ -13,6 +13,7 @@
     "injectionsQuery": "scss-injections.scm",
     "foldsQuery": "scss-folds.scm",
     "indentsQuery": "scss-indents.scm",
+    "tagsQuerySupportsLocalPath": true,
     "tagsQuery": "scss-tags.scm"
   },
   "comments": {
